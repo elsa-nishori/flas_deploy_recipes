@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Add a New Recipe!</h1>
+        <form action="/recipes/add" method="post">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p style="color:red">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <input type="hidden" name="user_id" value="{{ user['user_id'] }}">
+            <div class="form-group">
+                <label>Name:</label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group">
+                <label>Description:</label>
+                <textarea name="description" class="form-control" cols="30" rows="10" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Instructions:</label>
+                <textarea name="instruction" class="form-control" cols="30" rows="10" required></textarea>
+            </div>
+            <div class="form-group">
+                <label>Date Cooked/Made:</label>
+                <input type="date" name="date_cooked" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label>Under 30 minutes?</label>
+                <input type="radio" name="under_30_min" value="1" required>
+                <label>Yes</label>
+                <input type="radio" name="under_30_min" value="0">
+                <label>No</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Recipe</button>
+            <a href="/recipes">Back to recipes</a> | 
+            <a href="/logout">Logout </a>
+        </form>
+    </div>
+</body>
+</html>
